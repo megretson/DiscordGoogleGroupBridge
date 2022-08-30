@@ -23,5 +23,5 @@ async def on_message(message):
 
 
 load_dotenv()
-print(os.getenv("TOKEN"))
-client.run(os.getenv('TOKEN'))
+print(os.getenv("DISCORD_TOKEN"))
+client.run(os.getenv('DISCORD_TOKEN'))

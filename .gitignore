@@ -130,3 +130,5 @@ dmypy.json
 
 # Secret key is stored in an .env file 
 *.env
+credentials.json
+token.json
