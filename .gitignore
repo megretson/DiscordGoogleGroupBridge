@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 # Secret key is stored in an .env file 
+*.env

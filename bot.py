@@ -1,11 +1,17 @@
+# This example requires the 'message_content' intent.
+
 import discord
 import os
+from dotenv import load_dotenv
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f'We have logged in as {client.user}')
 
 @client.event
 async def on_message(message):
@@ -16,7 +22,6 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
 
-def send_discord_message():
-    pass
-
+load_dotenv()
+print(os.getenv("TOKEN"))
 client.run(os.getenv('TOKEN'))
