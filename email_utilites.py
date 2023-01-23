@@ -11,21 +11,17 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
+creds = None
+
 def send_email():
     pass
 
-def main():
-    """Shows basic usage of the Gmail API.
-    Lists the user's Gmail labels.
-    """
-    creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
+def authenticate():
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
+        print("Credentials invalid")
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
@@ -36,6 +32,7 @@ def main():
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
+def list_labels():
     try:
         # Call the Gmail API
         service = build('gmail', 'v1', credentials=creds)
@@ -55,4 +52,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    authenticate()
+    list_labels()
